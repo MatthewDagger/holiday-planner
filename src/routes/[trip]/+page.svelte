@@ -47,6 +47,7 @@
 		</div>
 	</div>
 	{#each data.stops as stop}
+		{@const currency = stop.currency}
 		<div class="h-screen snap-start relative">
 			<img src={stop.image} alt={stop.alt} class="h-screen w-full object-cover" />
 			<div class="absolute bottom-0 right-0 w-4/5 h-5/6 box-border p-5">
@@ -58,7 +59,7 @@
 					<div class="w-1/2 pr-5">
 						<h2 class="text-white text-xl font-bold mb-5">Accomodation</h2>
 						{#each stop.accomodations as accomodation}
-							<AccomodationCard {...accomodation}></AccomodationCard>
+							<AccomodationCard {...accomodation} {currency}></AccomodationCard>
 						{/each}
 					</div>
 					<div class="w-1/2">
