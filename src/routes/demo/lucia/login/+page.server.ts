@@ -89,6 +89,7 @@ export const actions: Actions = {
 				secure: !dev
 			});
 		} catch (e) {
+			console.log(e)
 			return fail(500, { message: 'An error has occurred' });
 		}
 		return redirect(302, '/demo/lucia');
@@ -102,11 +103,12 @@ function generateUserId(length = 21): string {
 }
 
 function validateUsername(username: unknown): username is string {
+	console.log(username)
 	return (
 		typeof username === 'string' &&
 		username.length >= 3 &&
 		username.length <= 31 &&
-		/^[a-z0-9_-]+$/.test(username)
+		/^[A-Za-z0-9_-]+$/.test(username)
 	);
 }
 
