@@ -1,4 +1,5 @@
 <script lang="ts">
+	import AccomodationCard from "$lib/components/accomodation-card.svelte";
 	import AttractionCard from "$lib/components/attraction-card.svelte";
 	import Progress from "$lib/components/ui/progress/progress.svelte";
 
@@ -53,13 +54,23 @@
 					{stop.name}
 					<hr />
 				</h2>
-				<div class="w-1/2">
-					{#each stop.attractions as attraction}
-						<AttractionCard {...attraction}></AttractionCard>
-						<AttractionCard {...attraction}></AttractionCard>
-						<AttractionCard {...attraction}></AttractionCard>
-					{/each}
+				<div class="flex">
+					<div class="w-1/2 pr-5">
+						<h2 class="text-white text-xl font-bold mb-5">Accomodation</h2>
+						{#each stop.accomodations as accomodation}
+							<AccomodationCard {...accomodation}></AccomodationCard>
+						{/each}
+					</div>
+					<div class="w-1/2">
+						<h2 class="text-white text-xl font-bold mb-5">Activities</h2>
+						{#each stop.attractions as attraction}
+							<AttractionCard {...attraction}></AttractionCard>
+							<AttractionCard {...attraction}></AttractionCard>
+							<AttractionCard {...attraction}></AttractionCard>
+						{/each}
+					</div>
 				</div>
+
 			</div>
 		</div>
 	{/each}

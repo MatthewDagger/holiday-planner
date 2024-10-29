@@ -32,7 +32,8 @@
         
     </Card.Content>
 
-    <div class="hover:bg-zinc-200 w-full cursor-pointer rounded-b-xl" onclick={() => expanded = !expanded}>
+    <div class="hover:bg-zinc-200 w-full cursor-pointer rounded-b-xl" onclick={() => expanded = !expanded}
+        role="none">
         <CardFooter class="flex items-center justify-center">
             {#if expanded}
             <IconLess />
