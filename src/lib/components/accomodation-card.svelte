@@ -10,9 +10,9 @@
         alt: string,
         location: string,
         website: string,
-        rooms: [{ room_type: string, room_min_cost: number, room_max_cost: number }],
-        currency: string}
-        = $props()
+        rooms: { room_type: string, room_min_cost: number, room_max_cost: number }[],
+        currency: string
+    } = $props()
 
     let selectedRoomName: Selected<string> = $state({value: ""})
     let selectedRoom = $derived(rooms.find(room => room.room_type == selectedRoomName.value))

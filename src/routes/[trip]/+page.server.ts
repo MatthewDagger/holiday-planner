@@ -21,13 +21,13 @@ export async function load({ params }) {
 							rooms: [
 								{
 									room_type: "Double Room",
-									room_min_cost: "331",
-									room_max_cost: "437"
+									room_min_cost: 331,
+									room_max_cost: 437
 								},
 								{
 									room_type: "Single Room",
-									room_min_cost: "277",
-									room_max_cost: "320"
+									room_min_cost: 277,
+									room_max_cost: 320
 								}
 							]
 

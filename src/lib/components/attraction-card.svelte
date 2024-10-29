@@ -9,7 +9,7 @@
         description: string,
         image: string,
         alt:string
-    }= $props()
+    } = $props()
 
     let expanded = $state(false)
 </script>
