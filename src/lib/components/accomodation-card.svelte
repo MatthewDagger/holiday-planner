@@ -1,12 +1,21 @@
 <script lang="ts">
     import * as Card from "$lib/components/ui/card";
     import * as Select from "$lib/components/ui/select";
-	import CardFooter from "./ui/card/card-footer.svelte";
-    let {name, description, image, alt, location, website, rooms, currency} = $props()
+    import IconWeb from 'virtual:icons/mdi/web';
+    import type { Selected } from 'bits-ui';
+    let {name, description, image, alt, location, website, rooms, currency} : {
+        name: string,
+        description: string,
+        image: string,
+        alt: string,
+        location: string,
+        website: string,
+        rooms: [{ room_type: string, room_min_cost: number, room_max_cost: number }],
+        currency: string}
+        = $props()
 
-    let test = [1,2]
-    let selectedRoomName = $state("")
-    let selectedRoom = $derived(rooms.find(room => room.room_type == selectedRoomName))
+    let selectedRoomName: Selected<string> = $state({value: ""})
+    let selectedRoom = $derived(rooms.find(room => room.room_type == selectedRoomName.value))
     let currFormatter = new Intl.NumberFormat('en-US', {
         maximumSignificantDigits: 2,
         style: 'currency',
@@ -18,22 +27,23 @@
     <Card.Header class="w-full relative">
         <Card.Title>
             {name}
+            <div class="absolute right-5 top-5 w-1/2">
+                <Select.Root
+                    bind:selected={selectedRoomName}>
+                    <Select.Trigger class="w-[180px] float-right">
+                        <Select.Value placeholder="Room Type" />
+                    </Select.Trigger>
+                    <Select.Content>
+                        {#each rooms as room}
+                            <Select.Item value={room.room_type}>{room.room_type}</Select.Item>
+                        {/each}
+                    </Select.Content>
+                  </Select.Root>
+            </div>
         </Card.Title>
-        <div  class="absolute right-5">
-            <Select.Root
-                onSelectedChange={s => selectedRoomName = s.value}>
-                <Select.Trigger class="w-[180px]">
-                    <Select.Value placeholder="Room Type" />
-                </Select.Trigger>
-                <Select.Content>
-                    {#each rooms as room}
-                        <Select.Item value="{room.room_type}">{room.room_type}</Select.Item>
-                    {/each}
-                </Select.Content>
-              </Select.Root>
-        </div>
-        <Card.Description>
-            {#if selectedRoomName != ""}
+        
+        <Card.Description class="w-1/2">
+            {#if selectedRoomName.value !== "" && selectedRoom}
                 {currFormatter.format(selectedRoom.room_min_cost)}/night - {currFormatter.format(selectedRoom.room_max_cost)}/night
             {:else}
                 {currFormatter.format(rooms.reduce((prev, curr) => prev.room_min_cost < curr.room_min_cost ? prev : curr).room_min_cost)}/night - 
@@ -53,9 +63,9 @@
         </p>
     </Card.Content>
 
-    <CardFooter class="flex items-center justify-center">
-
-    </CardFooter>
+    <Card.Footer class="">
+        <a href={website}><IconWeb class="text-xl text-gray-700"/></a>
+    </Card.Footer>
 
 
 </Card.Root>

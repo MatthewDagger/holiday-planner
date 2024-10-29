@@ -4,7 +4,12 @@
     import IconMore from 'virtual:icons/ic/baseline-expand-more';
     import IconLess from 'virtual:icons/ic/baseline-expand-less';
 
-    let {name, description, image, alt} = $props()
+    let {name, description, image, alt} : {
+        name: string,
+        description: string,
+        image: string,
+        alt:string
+    }= $props()
 
     let expanded = $state(false)
 </script>

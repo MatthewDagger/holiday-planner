@@ -6,3 +6,4 @@
 <div class="flex justify-center items-center bg-white">
 	{@render children()}
 </div>
+
